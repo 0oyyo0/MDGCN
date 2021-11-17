@@ -119,6 +119,8 @@ class GetInst_A(object):
             dist1 = self.Eu_dist(cen_sp, cen_nei)
             sp_A_s1[sp_idx0, nei_idx0] = dist1 # sp_A_s1[0,[1,25]] = dist1 sp_A_s1[0][1]=sp_A_s1[0][25]
             
+
+            
         self.sp_A.append(sp_A_s1) #第一个multi-scale
         for scale_idx in range(scale-1): # scale 0 1  得到第二个第三个multi-scale
             self.sp_A.append(self.AddConnection(self.sp_A[-1])) # 第二个由第一个得到?第三个由第二个得到？

@@ -44,13 +44,23 @@ trmask = np.matlib.reshape(np.array(model.trmask, dtype='bool'), [
 
 temask = np.matlib.reshape(np.array(model.temask, dtype='bool'), [
                            np.shape(model.trmask)[0], 1])
+
+# for i, A_x in enumerate(model.sp_A):
+#     with open('./tu_{}.txt'.format(i),'w') as f:
+#         for i in A_x:
+#             for j in i:
+#                 f.write(str(j))
+#                 f.write(' ')
+#             f.write('\n')
+
+
 sp_support = []
 
 
 for A_x in model.sp_A:
     sp_A = np.array(A_x, dtype='float32')
     sp_support.append(np.array(model.CalSupport(sp_A), dtype='float32'))
-
+    
 
 # *******************************************************************************
 # tenboard_dir = './tensorboard/'
@@ -84,12 +94,12 @@ with tf.Session() as sess:
         
 
 
-        with open('./tSNE/txt/hidden_{}.txt'.format(epoch),'w') as f:
-            for i in outs[3]:
-                for j in i:
-                    f.write(str(j))
-                    f.write(' ')
-                f.write('\n')
+        # with open('./tSNE/txt/hidden_{}.txt'.format(epoch),'w') as f:
+        #     for i in outs[3]:
+        #         for j in i:
+        #             f.write(str(j))
+        #             f.write(' ')
+        #         f.write('\n')
 
         pixel_wise_pred = np.argmax(outs[3], axis=1) # pixel_wise_pred: (949,) 每一行最大值的索引值[ 1  1  1 10 10 10 12...]第0块标签为1
         with open('./tSNE/txt/hidden_pixel_wise_pred_{}.txt'.format(epoch),'w') as f:
